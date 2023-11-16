@@ -2,39 +2,40 @@
 
 /**
  * main - principal function
- * @ac: argument
- * @av: array of arguments
  * Return: 0
 */
-int main(int ac, char **av)
+int main(void)
 {
-	char *line;
-	size_t len;
-	ssize_t cmd = 0;
-	char *token, **array = NULL;
-	int i = 0;
-	(void) ac, (void) av;
+	char *line = NULL;
+	size_t buf = 0;
+	ssize_t n;
+	char *token, **array;
+	int  i = 0;
 
 	while (1)
-		{
+	{
 		if (isatty(STDIN_FILENO))
-		write(STDIN_FILENO, "$ ", 2);
-		cmd = getline(&line, &len, stdin);
-		if (cmd == -1)
+		write(1, "$", 2);
+		n = getline(&line, &buf, stdin);
+		array = malloc(sizeof(char *) * 1024);
+		if (n == -1)
 		{
+			write(1, "\n", 2);
 			break;
 		}
-		token = strtok(line, " \t\n");
-		array = malloc(sizeof(char *) * 1024);
+		token = strtok(line, KO_DELIM);
 		while (token != NULL)
 		{
 			array[i] = token;
-			token = strtok(NULL, " \t\n");
+			token = strtok(NULL, KO_DELIM);
 			i++;
 		}
+
 		array[i] = NULL;
 		execute(line, array);
-	}
+		i = 0;
 		free(line);
-		return (0);
+		line = NULL;
+	}
+	return (0);
 }

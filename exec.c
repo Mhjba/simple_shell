@@ -19,9 +19,13 @@ void execute(char *line, char **array)
 		if (execve(line, array, NULL))
 		{
 			perror("error");
-			free(array);
+			exit(1);
 		}
 	}
 	else
+	{
 		wait(&status);
+		free(array);
+	}
+		return;
 }

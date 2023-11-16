@@ -7,8 +7,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#define KO_DELIM "\t\n"
 
-int main(int ac, char **gv);
+
 void execute(char *line, char **array);
 
 #endif
