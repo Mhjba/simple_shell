@@ -21,7 +21,7 @@ int _strlen(char *s)
  * _strcat - concatenates to strings
  * @dest: destination.
  * @src: source.
- * Return: the pointer to dest
+ * return: the pointer to dest
 */
 char *_strcat(char *dest, char *src)
 {
