@@ -2,15 +2,19 @@
 
 /**
  * main - principal function
+ * @ac: arguments
+ * @argv: arguments
  * Return: 0
 */
-int main(void)
+int main(int ac, char **argv)
 {
 	char *line = NULL;
 	size_t buf = 0;
 	ssize_t n;
 	char *token, **array;
 	int  i = 0;
+	(void) ac;
+	(void) argv;
 
 	while (1)
 	{
@@ -31,9 +35,9 @@ int main(void)
 			i++;
 		}
 		array[i] = NULL;
-		execute(line, array);
+		free(array);
+		execute(line, argv);
 		i = 0;
-		free(line);
 		line = NULL;
 	}
 	return (0);

@@ -8,11 +8,12 @@
 #include <sys/wait.h>
 
 #define KO_DELIM "\t\n"
+extern char **environ;
 
-
-void execute(char *line, char **array);
+int execute(char *line, char **argv);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
+int main(int ac, char **argv);
 
 #endif

@@ -3,12 +3,12 @@
 /**
  * execute - execute the command
  * @line: ponter to string
- * @array: array of pointers
+ * @argv: array of pointers
  *
- * Return: 0.
+ * Return: int.
  */
 
-void execute(char *line, char **array)
+int execute(char *line, char **argv)
 {
 	pid_t pid;
 	int status;
@@ -16,16 +16,17 @@ void execute(char *line, char **array)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (execve(line, array, NULL))
+		if (execve(line, argv, environ) == -1)
 		{
-			perror("error");
-			exit(1);
+			perror(argv[0]);
+			free(line);
+			exit(0);
 		}
 	}
 	else
 	{
 		wait(&status);
-		free(array);
+		free(line);
 	}
-		return;
+		return (WEXITSTATUS(status));
 }
