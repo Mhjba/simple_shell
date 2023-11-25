@@ -30,7 +30,6 @@ int main(void)
 			token = strtok(NULL, KO_DELIM);
 			i++;
 		}
-
 		array[i] = NULL;
 		execute(line, array);
 		i = 0;
