@@ -1,17 +1,23 @@
-#include "holberton.h"
+#include "shell.h"
 
 /**
- * read_line - reads the input string.
- *
- * @i_eof: return value of getline function
- * Return: input string
- */
-char *read_line(int *i_eof)
+ * read_line - read line.
+ * Return: line.
+*/
+char *read_line(void)
 {
-	char *input = NULL;
-	size_t bufsize = 0;
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t n;
 
-	*i_eof = getline(&input, &bufsize, stdin);
+	if (isatty(STDIN_FILENO))
+	write(STDOUT_FILENO, "$ ", 2);
+	n = getline(&line, &len, stdin);
+	if (n == -1)
+	{
+		free(line);
+		return (NULL);
+	}
 
-	return (input);
+	return (line);
 }
