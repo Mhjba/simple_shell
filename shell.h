@@ -10,17 +10,14 @@
 #include <errno.h>
 #include <fcntl.h>
 
-#define DELIM " \t\n"
-extern char **environ;
 
 
-char *read_line(void);
-char **tokenizer(char *line);
-int _execute(char **command, char **argv);
-void free_str(char **arr);
+char *get_line(void);
+char **splits(char *str);
+int execute(char **array, char **argv);
+void free_str(char **argv);
 
-char *_strdup(const char *str);
-int _strcmp(char *s1, char *s2);
+char *_strdup(char *str);
 int _strlen(char *str);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
