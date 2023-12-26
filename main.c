@@ -30,7 +30,7 @@ int main(int ac, char **av)
 {
 	char *line = NULL;
 	char **buffer = NULL;
-	int status = 0;
+	int status = 0, input = 0;
 	(void) ac;
 
 	while (1)
@@ -42,10 +42,11 @@ int main(int ac, char **av)
 		write(STDOUT_FILENO, "\n", 1);
 			return (status);
 	}
-		buffer = splits(line);
-		if (!buffer)
-			continue;
-		status = execute(buffer, av);
+	input++;
+	buffer = splits(line);
+	if (!buffer)
+		continue;
+	status = execute(buffer, av, input);
 	}
 }
 
