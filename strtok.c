@@ -17,8 +17,8 @@ char **splits(char *str)
 	token = strtok(tokens, " \t\n");
 	if (token == NULL)
 	{
-		free(str), str = NULL;
-		free(tokens), tokens = NULL;
+		free(str = NULL);
+		free(tokens = NULL);
 		return (NULL);
 	}
 	while (token)
@@ -26,7 +26,7 @@ char **splits(char *str)
 		con++;
 		token = strtok(NULL, " \t\n");
 	}
-	free(tokens), tokens = NULL;
+	free(tokens = NULL);
 	array = malloc(sizeof(char *) * (con + 1));
 	if (!array)
 	{
@@ -40,7 +40,7 @@ char **splits(char *str)
 		token = strtok(NULL, " \t\n");
 		i++;
 	}
-	free(str), str = NULL;
+	free(str = NULL);
 	array[i] = NULL;
 	return (array);
 }

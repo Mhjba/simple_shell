@@ -24,38 +24,29 @@ char *get_line(void)
 /**
  * execute - Execute a command with arguments.
  * @array: array.
- * @argv: argument
- * @buf: integer.
+ * @argv: argument.
  * Return: The exit status
 */
-int execute(char **array, char **argv, int buf)
+int execute(char **array, char **argv)
 {
 	pid_t pid;
 	int status;
-	char *num;
 
-	num = _path(array[0]);
-	if (!num)
-	{
-		p_err(argv[0], array[0], buf);
-		free_str(array);
-			return (0);
-	}
 	pid = fork();
 
 	if (pid == 0)
 	{
-		if (execve(num, array, NULL) == -1)
+		if (execve(array[0], array, NULL) == -1)
 		{
-			free(num), num = NULL;
+			perror(argv[0]);
 			free_str(array);
+			exit(0);
 		}
 	}
 	else
 	{
 		wait(&status);
 		free_str(array);
-		free(num), num = NULL;
 	}
 	return (WEXITSTATUS(status));
 }
